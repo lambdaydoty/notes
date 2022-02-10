@@ -14,6 +14,7 @@
   3. `≡` (*equivalence*): `P≡Q` ...                                   , so that `(p≡Q)(x)=true` iff `P(x)=Q(x)`.
   4. `⇒` (*implication*): `P⇒Q` ...                                   , so that `(P⇒Q)(x)=false` iff `P(x)=true` and `Q(x)=false`.
   5. `¬` (*negation*):    `¬P`  ...                                   , so that `(¬P)(x)=true`  iff `P(x)=false`.
+  * Notes: in *GF(2)*, *x∧y = x.y*, *x∨y = x+y-xy*, *¬x = 1-x*, *x≡y = 1-(x+y)*, 
 - Conventions:
   1. We also write `Q⇐P` for `P⇒Q`.
   2. To avoid parentheses, we enforces the following priorities: `¬` > `∧` > `∨` > `⇒` > `≡`.
@@ -22,10 +23,23 @@
   1. `[P≡Q]` means `P`, `Q` denote the same function.
   2. Following above, `Q` may be *substituted* for any occurrence of `P` in in an expression `R` without changing the value of `R`.
   3. Common Laws are ...
-    - *idempotence*: `[P∨P ≡ P]`, `[P∧P ≡ P]`
-    - *commutativity*: `[P∧Q ≡ Q∧P]`, `[P∨Q ≡ Q∨P]`, `[P≡Q ≡ Q≡P]`
-    - *associativity*: `[(P∧Q)∧R ≡ P∧(Q∧R)]`, `[(P∨Q)∨R ≡ P∨(Q∨R)]`,  `[(P≡Q)≡R ≡ P≡(Q≡R)]`
-    - *distributivity, absorption, false-true rules, de morgan, negation, implication, equivalence*.
+    - *idempotence* (of `∨`, `∧`): `[P∨P ≡ P]`, `[P∧P ≡ P]`
+    - *commutativity* (of `≡`, `∨`, `∧`): `[P∧Q ≡ Q∧P]`, `[P∨Q ≡ Q∨P]`, `[P≡Q ≡ Q≡P]`
+    - *associativity* (of `≡`, `∨`, `∧`): `[(P∧Q)∧R ≡ P∧(Q∧R)]`, `[(P∨Q)∨R ≡ P∨(Q∨R)]`,  `[(P≡Q)≡R ≡ P≡(Q≡R)]`
+    - *distributivity:
+      * `[P∧(Q∨R) ≡ (P∧Q)∨(P∧R)]`
+      * `[P∨(Q∧R) ≡ (P∨Q)∧(P∨R)]`
+      * `[P∨(Q≡R) ≡ (P∨Q)≡(P∨R)]`
+    - absorption
+      * `[P∧(P∨R) ≡ P]`
+      * `[P∨(P∧R) ≡ P]`
+    - false-true rules
+      * `[P∧true ≡ P]`, `[P∧false ≡ false]`
+      * `[P∨true ≡ true], `[P∨false ≡ P]`
+    - de morgan: `[¬(P∧Q) ≡ ¬P∨¬Q]`, `[¬(P∨Q) ≡ ¬P∧¬Q]`
+    - negation: `[¬¬P ≡ P]`, ``
+    - implication:
+    - equivalence*:
   4. When `[P⇒Q]` holds, we say `P` is *stronger* than `Q`, `Q` is *weaker* than `P`; `true` is the *weakest* predicate; `false` is the `strongest`.
     - `[P⇒true]` for all `P`
     - `[false⇒P]` for all `P`
@@ -85,8 +99,5 @@
 - Repetition: `{P} while.B.do.S {Q}`
   1. `[P∧¬B ⇒ Q]`
   2. `{P∧B} S {P}`
-  3. an integer function `t` on the state spaces exists such that:
-    * `[P∧B ⇒ t>=0]` and
-    * `{P∧B∧(t=C)} S {t<C}` implies
-    * `{P} while.B.do.S {Q}`
+  3. an integer function `t` on the state spaces exists such that `[P∧B ⇒ t>=0]` and `{P∧B∧(t=C)} S {t<C}` implies `{P} while.B.do.S {Q}`.
 
